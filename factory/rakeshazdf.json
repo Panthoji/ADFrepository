@@ -1,0 +1,9 @@
+{
+	"name": "rakeshazdf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e6c8d499-40d5-4a87-99f6-7139a292b318",
+		"tenantId": "ccac5481-1ccf-4319-a12e-9dd7a5121053"
+	}
+}

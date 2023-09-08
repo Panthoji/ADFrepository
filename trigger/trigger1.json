@@ -1,0 +1,17 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/hourlyfiles/blobs/",
+			"ignoreEmptyBlobs": false,
+			"scope": "/subscriptions/4dafd59c-7293-4efe-9370-dd3740a79617/resourceGroups/rakeshrg/providers/Microsoft.Storage/storageAccounts/rakeshsta",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

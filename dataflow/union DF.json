@@ -1,0 +1,82 @@
+{
+	"name": "union DF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "HRinput",
+						"type": "DatasetReference"
+					},
+					"name": "union"
+				},
+				{
+					"dataset": {
+						"referenceName": "Salesinput",
+						"type": "DatasetReference"
+					},
+					"name": "union1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Financeinput",
+						"type": "DatasetReference"
+					},
+					"name": "Union2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "union",
+						"type": "DatasetReference"
+					},
+					"name": "Allemp"
+				}
+			],
+			"transformations": [
+				{
+					"name": "unionn"
+				},
+				{
+					"name": "sort1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empid as string,",
+				"          empname as string,",
+				"          deptid as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> union",
+				"source(output(",
+				"          empid as string,",
+				"          empname as string,",
+				"          deptid as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> union1",
+				"source(output(",
+				"          empid as string,",
+				"          empname as string,",
+				"          deptid as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Union2",
+				"union, union1, Union2 union(byName: true)~> unionn",
+				"unionn sort(asc(empname, true)) ~> sort1",
+				"sort1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['All dept employees'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> Allemp"
+			]
+		}
+	}
+}
